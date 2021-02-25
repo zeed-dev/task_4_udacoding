@@ -1,6 +1,9 @@
 part of 'pages.dart';
 
 class DictionaryPage extends StatefulWidget {
+  final List<Dictionary> dictionary;
+  DictionaryPage({this.dictionary});
+
   @override
   _DictionaryPageState createState() => _DictionaryPageState();
 }
@@ -64,6 +67,7 @@ class _DictionaryPageState extends State<DictionaryPage> {
                 onTap: () {
                   Navigator.pop(context);
                   print("Back");
+                  context.read<DictionaryCubit>().getDataLimit();
                 },
                 child: Image.asset(
                   "assets/btn_back.png",

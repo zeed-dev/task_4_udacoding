@@ -10,6 +10,11 @@ class _HomePageState extends State<HomePage> {
   int indexDic = 0;
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView(
@@ -64,28 +69,34 @@ class _HomePageState extends State<HomePage> {
               SizedBox(
                 height: 16,
               ),
-              Container(
-                height: 150,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: mockFarm.length,
-                  itemBuilder: (context, index) {
-                    return FarmCard(
-                      farm: mockFarm[index],
-                      index: index,
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => DetailFarmPage(
-                              farm: mockFarm[index],
-                            ),
-                          ),
-                        );
-                      },
-                    );
-                  },
-                ),
+              BlocBuilder<FarmCubit, FarmState>(
+                builder: (_, state) => (state is FarmLoaded)
+                    ? Container(
+                        height: 150,
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: state.farm.length,
+                          itemBuilder: (context, index) {
+                            return FarmCard(
+                              farm: state.farm[index],
+                              index: index,
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => DetailFarmPage(
+                                      farm: state.farm[index],
+                                    ),
+                                  ),
+                                );
+                              },
+                            );
+                          },
+                        ),
+                      )
+                    : Center(
+                        child: CircularProgressIndicator(),
+                      ),
               ),
               SizedBox(
                 height: 30,
@@ -102,32 +113,38 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
               ),
-              Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: defaultMargin,
-                ),
-                child: Column(
-                  children: mockNews.map(
-                    (e) {
-                      index++;
-                      return NewsCard(
-                        index: index,
-                        news: e,
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => DetailNewsPage(
+              BlocBuilder<NewsCubit, NewsState>(
+                builder: (context, state) => (state is NewsLoaded)
+                    ? Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: defaultMargin,
+                        ),
+                        child: Column(
+                          children: state.news.map(
+                            (e) {
+                              index++;
+                              return NewsCard(
+                                index: index,
                                 news: e,
-                              ),
-                            ),
-                          );
-                        },
-                      );
-                    },
-                  ).toList(),
-                ),
-              ),
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => DetailNewsPage(
+                                        news: e,
+                                      ),
+                                    ),
+                                  );
+                                },
+                              );
+                            },
+                          ).toList(),
+                        ),
+                      )
+                    : Center(
+                        child: CircularProgressIndicator(),
+                      ),
+              )
             ],
           ),
           SizedBox(
@@ -145,30 +162,33 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
           ),
-          // SizedBox(
-          //   height: 10,
-          // ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: defaultMargin),
-            child: Column(
-              children: mockDictionary.map((e) {
-                indexDic++;
-                return DictionaryCard(
-                  indexDic: indexDic,
-                  dictionary: e,
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => DetailDictionary(
+          BlocBuilder<DictionaryCubit, DictionaryState>(
+            builder: (_, state) => (state is DictionaryLoaded)
+                ? Padding(
+                    padding: EdgeInsets.symmetric(horizontal: defaultMargin),
+                    child: Column(
+                      children: state.dictionary.map((e) {
+                        indexDic++;
+                        return DictionaryCard(
+                          indexDic: indexDic,
                           dictionary: e,
-                        ),
-                      ),
-                    );
-                  },
-                );
-              }).toList(),
-            ),
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => DetailDictionary(
+                                  dictionary: e,
+                                ),
+                              ),
+                            );
+                          },
+                        );
+                      }).toList(),
+                    ),
+                  )
+                : Center(
+                    child: CircularProgressIndicator(),
+                  ),
           ),
           SizedBox(
             height: 20,
@@ -193,6 +213,7 @@ class _HomePageState extends State<HomePage> {
                     builder: (context) => DictionaryPage(),
                   ),
                 );
+                context.read<DictionaryCubit>().getDataAll();
               },
             ),
           ),

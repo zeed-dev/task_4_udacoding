@@ -25,8 +25,8 @@ class NewsCard extends StatelessWidget {
             margin: EdgeInsets.only(top: index == 1 ? 0 : 20),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(18),
-              child: Image.asset(
-                news.photo,
+              child: Image.network(
+                baseURL + news.photo,
                 height: 110,
                 width: 130,
                 fit: BoxFit.cover,
@@ -42,7 +42,7 @@ class NewsCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  news.title,
+                  news.titile,
                   style: blackFontStyle,
                   maxLines: 1,
                   overflow: TextOverflow.clip,
@@ -51,7 +51,7 @@ class NewsCard extends StatelessWidget {
                   height: 3,
                 ),
                 Text(
-                  news.descrption,
+                  news.description,
                   style: greyFontStyle,
                   maxLines: 3,
                   overflow: TextOverflow.clip,

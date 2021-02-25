@@ -121,10 +121,11 @@ class _SignUpPageState extends State<SignUpPage> {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(
-                          builder: (context) => HomePage(),
-                        ),
+                        MaterialPageRoute(builder: (context) => HomePage()),
                       );
+                      context.read<NewsCubit>().getNews();
+                      context.read<FarmCubit>().getFarm();
+                      context.read<DictionaryCubit>().getDataLimit();
                     },
                   ),
                 ),

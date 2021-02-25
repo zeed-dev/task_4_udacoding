@@ -9,14 +9,12 @@ class SplashPage extends StatelessWidget {
           Column(
             children: [
               SizedBox(
-                height: 111,
+                height: 50,
               ),
-              Image.asset(
-                "assets/splash.png",
+              LottieBuilder.asset(
+                "assets/cow.json",
                 width: 300,
-              ),
-              SizedBox(
-                height: 20,
+                height: 300,
               ),
               Text(
                 "Farm House",

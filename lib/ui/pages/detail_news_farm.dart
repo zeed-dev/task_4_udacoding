@@ -19,8 +19,8 @@ class _DetailNewsPageState extends State<DetailNewsPage> {
       body: SafeArea(
         child: Stack(
           children: [
-            Image.asset(
-              widget.news.photo,
+            Image.network(
+              baseURL + widget.news.photo,
               height: 358,
               fit: BoxFit.cover,
             ),
@@ -43,7 +43,7 @@ class _DetailNewsPageState extends State<DetailNewsPage> {
                         height: 30,
                       ),
                       Text(
-                        widget.news.title,
+                        widget.news.titile,
                         maxLines: 1,
                         overflow: TextOverflow.clip,
                         style: blackFontStyle.copyWith(
@@ -63,7 +63,7 @@ class _DetailNewsPageState extends State<DetailNewsPage> {
                         height: 20,
                       ),
                       Text(
-                        widget.news.descrption,
+                        widget.news.description,
                         style: greyFontStyle.copyWith(
                           fontSize: 16,
                         ),

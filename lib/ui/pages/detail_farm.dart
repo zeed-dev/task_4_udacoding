@@ -25,8 +25,8 @@ class _DetailFarmPageState extends State<DetailFarmPage> {
       body: SafeArea(
         child: Stack(
           children: [
-            Image.asset(
-              widget.farm.photo,
+            Image.network(
+              baseURL + widget.farm.foto,
               height: 358,
               fit: BoxFit.cover,
             ),

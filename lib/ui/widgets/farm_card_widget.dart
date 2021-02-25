@@ -37,8 +37,8 @@ class FarmCard extends StatelessWidget {
                 topLeft: Radius.circular(18),
                 topRight: Radius.circular(18),
               ),
-              child: Image.asset(
-                farm.photo,
+              child: Image.network(
+                baseURL + farm.foto,
                 height: 102,
                 fit: BoxFit.cover,
               ),
