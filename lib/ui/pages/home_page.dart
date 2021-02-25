@@ -186,7 +186,14 @@ class _HomePageState extends State<HomePage> {
                 "Go To Dictionary",
                 style: whiteFontStyle,
               ),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => DictionaryPage(),
+                  ),
+                );
+              },
             ),
           ),
           SizedBox(
