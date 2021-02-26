@@ -18,15 +18,4 @@ class DictionaryCubit extends Cubit<DictionaryState> {
       emit(DictionaryFailedLoaded(message: result.message));
     }
   }
-
-  Future<void> getDataAll() async {
-    ApiReturnValue<List<Dictionary>> result =
-        await DictionaryServices.getDataAll();
-
-    if (result.value != null) {
-      emit(DictionaryLoaded(dictionary: result.value));
-    } else {
-      emit(DictionaryFailedLoaded(message: result.message));
-    }
-  }
 }

@@ -16,43 +16,45 @@ class _DetailDictionaryState extends State<DetailDictionary> {
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: defaultMargin),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(
-                height: 37,
-              ),
-              GestureDetector(
-                onTap: () {
-                  Navigator.pop(context);
-                  print("Back");
-                },
-                child: Image.asset(
-                  "assets/btn_back.png",
-                  width: 40,
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: 37,
                 ),
-              ),
-              SizedBox(
-                height: 15,
-              ),
-              Text(
-                widget.dictionary.title,
-                style: blackFontStyle.copyWith(
-                  fontSize: 18,
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pop(context);
+                    print("Back");
+                  },
+                  child: Image.asset(
+                    "assets/btn_back.png",
+                    width: 40,
+                  ),
                 ),
-              ),
-              Text(
-                widget.dictionary.subtitle,
-                style: greyFontStyle,
-              ),
-              SizedBox(
-                height: 23,
-              ),
-              Text(
-                widget.dictionary.description,
-                style: greyFontStyle,
-              ),
-            ],
+                SizedBox(
+                  height: 15,
+                ),
+                Text(
+                  widget.dictionary.title,
+                  style: blackFontStyle.copyWith(
+                    fontSize: 18,
+                  ),
+                ),
+                Text(
+                  widget.dictionary.subtitle,
+                  style: greyFontStyle,
+                ),
+                SizedBox(
+                  height: 23,
+                ),
+                Text(
+                  widget.dictionary.description,
+                  style: greyFontStyle,
+                ),
+              ],
+            ),
           ),
         ),
       ),

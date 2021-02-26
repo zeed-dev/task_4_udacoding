@@ -9,30 +9,8 @@ class DictionaryServices {
 
     var response = await client.get(url);
 
-    print(response.statusCode);
-    print(response.body);
-
-    if (response.statusCode != 200) {
-      ApiReturnValue(message: "Error");
-    }
-
-    List data = json.decode(response.body);
-    List<Dictionary> dictionary =
-        data.map((e) => Dictionary.fromJson(e)).toList();
-
-    return ApiReturnValue(value: dictionary);
-  }
-
-  static Future<ApiReturnValue<List<Dictionary>>> getDataAll(
-      {http.Client client}) async {
-    client ??= http.Client();
-
-    String url = baseURL + "get_dictionary_all.php";
-
-    var response = await client.get(url);
-
-    print(response.statusCode);
-    print(response.body);
+    // print(response.statusCode);
+    // print(response.body);
 
     if (response.statusCode != 200) {
       ApiReturnValue(message: "Error");

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:farm_house/cubit/dictionary_cubit.dart';
 import 'package:farm_house/cubit/farm_cubit.dart';
 import 'package:farm_house/cubit/news_cubit.dart';
@@ -8,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:http/http.dart' as http;
 
 part 'splash_page.dart';
 part 'sign_in_page.dart';

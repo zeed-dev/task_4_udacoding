@@ -213,7 +213,6 @@ class _HomePageState extends State<HomePage> {
                     builder: (context) => DictionaryPage(),
                   ),
                 );
-                context.read<DictionaryCubit>().getDataAll();
               },
             ),
           ),

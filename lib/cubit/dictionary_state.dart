@@ -24,11 +24,3 @@ class DictionaryFailedLoaded extends DictionaryState {
   @override
   List<Object> get props => [message];
 }
-
-class DictionaryLoadedAll extends DictionaryState {
-  final List<Dictionary> dictionary;
-  DictionaryLoadedAll({this.dictionary});
-
-  @override
-  List<Object> get props => [dictionary];
-}

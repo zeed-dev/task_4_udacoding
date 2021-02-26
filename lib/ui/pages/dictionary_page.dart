@@ -11,9 +11,27 @@ class DictionaryPage extends StatefulWidget {
 class _DictionaryPageState extends State<DictionaryPage> {
   TextEditingController searchController = TextEditingController();
   bool isSearch = true;
-  List<Dictionary> filterList;
-  List<Dictionary> dataList;
+  List<Dictionary> filterList = [];
+  List<Dictionary> dataList = [];
   String query = "";
+
+  Future<Null> getDataAll({http.Client client}) async {
+    client ??= http.Client();
+
+    String url = baseURL + "get_dictionary_all.php";
+
+    var response = await client.get(url);
+
+    final List data = json.decode(response.body);
+
+    print(data);
+
+    for (var i in data) {
+      setState(() {
+        dataList.add(Dictionary.fromJson(i));
+      });
+    }
+  }
 
   void closeKeyboard(BuildContext context) {
     FocusScopeNode currentFocus = FocusScope.of(context);
@@ -24,15 +42,7 @@ class _DictionaryPageState extends State<DictionaryPage> {
   @override
   void initState() {
     super.initState();
-    _ambilData();
-  }
-
-  _ambilData() {
-    dataList = new List<Dictionary>();
-    for (var i = 0; i < mockDictionary.length; i++) {
-      var data = mockDictionary[i];
-      dataList.add(data);
-    }
+    getDataAll();
   }
 
   _DictionaryPageState() {
@@ -109,7 +119,7 @@ class _DictionaryPageState extends State<DictionaryPage> {
               isSearch
                   ? _seraching()
                   : Column(
-                      children: mockDictionary.map(
+                      children: dataList.map(
                         (e) {
                           return DictionaryCard(
                             dictionary: e,
