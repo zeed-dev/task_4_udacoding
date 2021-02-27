@@ -24,3 +24,4 @@ part 'detail_news_farm.dart';
 part 'detail_dictionary.dart';
 part 'dictionary_page.dart';
 part 'profil_page.dart';
+part 'main_page.dart';

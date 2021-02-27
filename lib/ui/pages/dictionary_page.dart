@@ -71,21 +71,7 @@ class _DictionaryPageState extends State<DictionaryPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
-                height: 37,
-              ),
-              GestureDetector(
-                onTap: () {
-                  Navigator.pop(context);
-                  print("Back");
-                  context.read<DictionaryCubit>().getDataLimit();
-                },
-                child: Image.asset(
-                  "assets/btn_back.png",
-                  width: 40,
-                ),
-              ),
-              SizedBox(
-                height: 15,
+                height: defaultMargin,
               ),
               Text(
                 "Dictionary",
@@ -138,7 +124,7 @@ class _DictionaryPageState extends State<DictionaryPage> {
                       ).toList(),
                     ),
               SizedBox(
-                height: 30,
+                height: 80,
               ),
             ],
           ),

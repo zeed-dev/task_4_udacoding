@@ -7,3 +7,4 @@ part 'farm_card_widget.dart';
 part 'rating_star_widget.dart';
 part 'news_card_widget.dart';
 part 'dictionary_card_widget.dart';
+part 'custom_bottom_navbar.dart';

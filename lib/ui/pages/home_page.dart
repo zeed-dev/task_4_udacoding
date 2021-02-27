@@ -210,33 +210,7 @@ class _HomePageState extends State<HomePage> {
                   ),
           ),
           SizedBox(
-            height: 20,
-          ),
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: defaultMargin),
-            height: 50,
-            child: RaisedButton(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(17),
-              ),
-              color: blueColor,
-              elevation: 0,
-              child: Text(
-                "Go To Dictionary",
-                style: whiteFontStyle,
-              ),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => DictionaryPage(),
-                  ),
-                );
-              },
-            ),
-          ),
-          SizedBox(
-            height: 30,
+            height: 80,
           ),
         ],
       ),

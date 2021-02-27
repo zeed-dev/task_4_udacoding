@@ -134,7 +134,7 @@ class _SignInPageState extends State<SignInPage> {
                                 Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => HomePage()),
+                                      builder: (context) => MainPage()),
                                 );
                               } else {
                                 setState(() {
