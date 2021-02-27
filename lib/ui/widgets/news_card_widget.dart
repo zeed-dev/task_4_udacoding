@@ -2,12 +2,10 @@ part of 'widgets.dart';
 
 class NewsCard extends StatelessWidget {
   final News news;
-  final int index;
   final Function onTap;
 
   NewsCard({
     this.news,
-    this.index,
     this.onTap,
   });
 
@@ -22,7 +20,7 @@ class NewsCard extends StatelessWidget {
       child: Row(
         children: [
           Container(
-            margin: EdgeInsets.only(top: index == 1 ? 0 : 20),
+            margin: EdgeInsets.only(top: 20),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(18),
               child: Image.network(

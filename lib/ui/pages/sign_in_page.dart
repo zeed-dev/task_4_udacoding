@@ -8,6 +8,8 @@ class SignInPage extends StatefulWidget {
 class _SignInPageState extends State<SignInPage> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  bool isLoading = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -70,6 +72,7 @@ class _SignInPageState extends State<SignInPage> {
                   ),
                   child: TextField(
                     controller: passwordController,
+                    obscureText: true,
                     decoration: InputDecoration(
                       border: InputBorder.none,
                       hintText: "Type your password",
@@ -83,18 +86,71 @@ class _SignInPageState extends State<SignInPage> {
                 Container(
                   height: 50,
                   width: MediaQuery.of(context).size.width,
-                  child: RaisedButton(
-                    color: blueColor,
-                    elevation: 0,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(9),
-                    ),
-                    child: Text(
-                      "Sign In",
-                      style: whiteFontStyle,
-                    ),
-                    onPressed: () {},
-                  ),
+                  child: isLoading
+                      ? Center(
+                          child: CircularProgressIndicator(),
+                        )
+                      : RaisedButton(
+                          color: blueColor,
+                          elevation: 0,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(9),
+                          ),
+                          child: Text(
+                            "Sign In",
+                            style: whiteFontStyle,
+                          ),
+                          onPressed: () async {
+                            if (!(emailController.text.trim() != "")) {
+                              Flushbar(
+                                duration: Duration(seconds: 2),
+                                flushbarPosition: FlushbarPosition.TOP,
+                                backgroundColor: Color(0xFFFF5C83),
+                                message: "Email must not be empty",
+                              ).show(context);
+                            } else if (!(passwordController.text.trim() !=
+                                "")) {
+                              Flushbar(
+                                duration: Duration(seconds: 2),
+                                flushbarPosition: FlushbarPosition.TOP,
+                                backgroundColor: Color(0xFFFF5C83),
+                                message: "Password must not be empty",
+                              ).show(context);
+                            } else {
+                              setState(() {
+                                isLoading = true;
+                              });
+                              await context.read<UserCubit>().signIn(
+                                    emailController.text,
+                                    passwordController.text,
+                                  );
+
+                              UserState state = context.read<UserCubit>().state;
+
+                              if (state is UserLoaded) {
+                                context.read<NewsCubit>().getNews();
+                                context.read<FarmCubit>().getFarm();
+                                context.read<DictionaryCubit>().getDataLimit();
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => HomePage()),
+                                );
+                              } else {
+                                setState(() {
+                                  isLoading = false;
+                                });
+                                Flushbar(
+                                  duration: Duration(seconds: 2),
+                                  flushbarPosition: FlushbarPosition.TOP,
+                                  backgroundColor: Color(0xFFFF5C83),
+                                  message:
+                                      "Email or password is not registered",
+                                ).show(context);
+                              }
+                            }
+                          },
+                        ),
                 ),
                 SizedBox(
                   height: 12,

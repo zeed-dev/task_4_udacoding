@@ -2,12 +2,10 @@ part of 'widgets.dart';
 
 class DictionaryCard extends StatelessWidget {
   final Dictionary dictionary;
-  final int indexDic;
   final Function onTap;
 
   DictionaryCard({
     this.dictionary,
-    this.indexDic,
     this.onTap,
   });
 
@@ -18,7 +16,7 @@ class DictionaryCard extends StatelessWidget {
         onTap();
       },
       child: Container(
-        margin: EdgeInsets.only(top: indexDic == 1 ? 0 : 20),
+        margin: EdgeInsets.only(top: 20),
         padding: EdgeInsets.symmetric(horizontal: 15),
         height: 75,
         decoration: BoxDecoration(

@@ -23,6 +23,14 @@ class News extends Equatable {
         date: json["date"],
       );
 
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "titile": titile,
+        "description": description,
+        "photo": photo,
+        "date": date,
+      };
+
   @override
   List<Object> get props => [id, photo, titile, date, description];
 }

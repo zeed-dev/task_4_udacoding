@@ -21,7 +21,20 @@ class _SignUpPageState extends State<SignUpPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
-                  height: 69,
+                  height: 37,
+                ),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pop(context);
+                    print("Back");
+                  },
+                  child: Image.asset(
+                    "assets/btn_back.png",
+                    width: 40,
+                  ),
+                ),
+                SizedBox(
+                  height: 15,
                 ),
                 Text(
                   "Sign Up",

@@ -6,9 +6,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int index = 0;
-  int indexDic = 0;
-
   @override
   void initState() {
     super.initState();
@@ -29,11 +26,37 @@ class _HomePageState extends State<HomePage> {
                 padding: EdgeInsets.symmetric(
                   horizontal: defaultMargin,
                 ),
-                child: Text(
-                  "Explore Now",
-                  style: blackFontStyle.copyWith(
-                    fontSize: 24,
-                  ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Explore Now",
+                      style: blackFontStyle.copyWith(
+                        fontSize: 24,
+                      ),
+                    ),
+                    IconButton(
+                      icon: Icon(
+                        Icons.person,
+                        size: 40,
+                      ),
+                      onPressed: () async {
+                        SharedPreferences sharedPreferences =
+                            await SharedPreferences.getInstance();
+                        String name = sharedPreferences.getString("name");
+                        String email = sharedPreferences.getString("email");
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ProfilPage(
+                              name: name,
+                              email: email,
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ],
                 ),
               ),
               SizedBox(
@@ -122,9 +145,7 @@ class _HomePageState extends State<HomePage> {
                         child: Column(
                           children: state.news.map(
                             (e) {
-                              index++;
                               return NewsCard(
-                                index: index,
                                 news: e,
                                 onTap: () {
                                   Navigator.push(
@@ -168,9 +189,7 @@ class _HomePageState extends State<HomePage> {
                     padding: EdgeInsets.symmetric(horizontal: defaultMargin),
                     child: Column(
                       children: state.dictionary.map((e) {
-                        indexDic++;
                         return DictionaryCard(
-                          indexDic: indexDic,
                           dictionary: e,
                           onTap: () {
                             Navigator.push(

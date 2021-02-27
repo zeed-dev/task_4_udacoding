@@ -1,7 +1,7 @@
-import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:farm_house/models/models.dart';
 import 'package:farm_house/services/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'news_state.dart';
 

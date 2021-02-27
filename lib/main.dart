@@ -1,11 +1,12 @@
 import 'package:farm_house/cubit/dictionary_cubit.dart';
 import 'package:farm_house/cubit/farm_cubit.dart';
 import 'package:farm_house/cubit/news_cubit.dart';
+import 'package:farm_house/cubit/user_cubit.dart';
 import 'package:farm_house/ui/pages/pages.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-void main() {
+void main() async {
   runApp(MyApp());
 }
 
@@ -17,6 +18,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => NewsCubit()),
         BlocProvider(create: (_) => FarmCubit()),
         BlocProvider(create: (_) => DictionaryCubit()),
+        BlocProvider(create: (_) => UserCubit()),
       ],
       child: MaterialApp(
         home: SplashPage(),

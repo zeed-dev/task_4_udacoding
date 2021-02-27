@@ -24,7 +24,7 @@ class _DictionaryPageState extends State<DictionaryPage> {
 
     final List data = json.decode(response.body);
 
-    print(data);
+    // print(data);
 
     for (var i in data) {
       setState(() {

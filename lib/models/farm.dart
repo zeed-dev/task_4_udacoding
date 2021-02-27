@@ -33,7 +33,8 @@ class Farm extends Equatable {
       );
 
   @override
-  List<Object> get props => throw UnimplementedError();
+  List<Object> get props =>
+      [id, name, cows, rate, mapUrl, foto, city, location];
 }
 
 List<Farm> mockFarm = [
