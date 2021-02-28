@@ -6,7 +6,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 part 'theme.dart';
 
-String baseURL = "http://192.168.1.8/farm-house-service/";
+// String baseURL = "http://192.168.1.8/farm-house-service/";
+String baseURL = "http://farmwebserver.000webhostapp.com/";
 
 saveDataPref({
   int value,
