@@ -26,37 +26,11 @@ class _HomePageState extends State<HomePage> {
                 padding: EdgeInsets.symmetric(
                   horizontal: defaultMargin,
                 ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Explore Now",
-                      style: blackFontStyle.copyWith(
-                        fontSize: 24,
-                      ),
-                    ),
-                    IconButton(
-                      icon: Icon(
-                        Icons.person,
-                        size: 40,
-                      ),
-                      onPressed: () async {
-                        SharedPreferences sharedPreferences =
-                            await SharedPreferences.getInstance();
-                        String name = sharedPreferences.getString("name");
-                        String email = sharedPreferences.getString("email");
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => ProfilPage(
-                              name: name,
-                              email: email,
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-                  ],
+                child: Text(
+                  "Explore Now",
+                  style: blackFontStyle.copyWith(
+                    fontSize: 24,
+                  ),
                 ),
               ),
               SizedBox(
@@ -210,7 +184,7 @@ class _HomePageState extends State<HomePage> {
                   ),
           ),
           SizedBox(
-            height: 80,
+            height: 100,
           ),
         ],
       ),

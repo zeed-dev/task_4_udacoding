@@ -42,6 +42,41 @@ class UserServices {
     return ApiReturnValue(value: user);
   }
 
+  static Future<ApiReturnValue<int>> signUp(
+    String name,
+    String email,
+    String password, {
+    http.Client client,
+  }) async {
+    client ??= http.Client();
+
+    String url = baseURL + "register.php";
+
+    var response = await client.post(
+      url,
+      body: {
+        'name': name,
+        'email': email,
+        'password': password,
+      },
+    );
+
+    var data = json.decode(response.body);
+
+    int value = data['value'];
+    String message = data['message'];
+
+    if (response.statusCode != 200) {
+      return ApiReturnValue(message: "Please Try Again");
+    }
+
+    if (value != 1) {
+      return ApiReturnValue(message: message);
+    }
+
+    return ApiReturnValue(value: value);
+  }
+
   static Future<ApiReturnValue<int>> signOut(String email,
       {http.Client client}) async {
     client ??= http.Client();

@@ -9,6 +9,12 @@ enum Status { login, notLogin }
 
 class _SplashPageState extends State<SplashPage> {
   @override
+  void initState() {
+    super.initState();
+    signOutPreff();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView(

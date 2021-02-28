@@ -24,3 +24,11 @@ class UserFailedLoaded extends UserState {
   @override
   List<Object> get props => [message];
 }
+
+class UserSignUp extends UserState {
+  final int value;
+  UserSignUp(this.value);
+
+  @override
+  List<Object> get props => [value];
+}

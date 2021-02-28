@@ -19,19 +19,6 @@ class ProfilPage extends StatelessWidget {
               SizedBox(
                 height: 37,
               ),
-              Padding(
-                padding: EdgeInsets.only(left: defaultMargin),
-                child: GestureDetector(
-                  onTap: () {
-                    Navigator.pop(context);
-                    print("Back");
-                  },
-                  child: Image.asset(
-                    "assets/btn_back.png",
-                    width: 40,
-                  ),
-                ),
-              ),
               SizedBox(
                 height: 50,
               ),

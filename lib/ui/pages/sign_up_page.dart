@@ -9,6 +9,7 @@ class _SignUpPageState extends State<SignUpPage> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController nameController = TextEditingController();
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -107,6 +108,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: TextField(
+                    obscureText: true,
                     controller: passwordController,
                     decoration: InputDecoration(
                       border: InputBorder.none,
@@ -121,26 +123,85 @@ class _SignUpPageState extends State<SignUpPage> {
                 Container(
                   height: 50,
                   width: MediaQuery.of(context).size.width,
-                  child: RaisedButton(
-                    color: blueColor,
-                    elevation: 0,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(9),
-                    ),
-                    child: Text(
-                      "Sign Up",
-                      style: whiteFontStyle,
-                    ),
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => HomePage()),
-                      );
-                      context.read<NewsCubit>().getNews();
-                      context.read<FarmCubit>().getFarm();
-                      context.read<DictionaryCubit>().getDataLimit();
-                    },
-                  ),
+                  child: isLoading
+                      ? Center(
+                          child: CircularProgressIndicator(),
+                        )
+                      : RaisedButton(
+                          color: blueColor,
+                          elevation: 0,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(9),
+                          ),
+                          child: Text(
+                            "Sign Up",
+                            style: whiteFontStyle,
+                          ),
+                          onPressed: () async {
+                            if (!(nameController.text.trim() != "")) {
+                              Flushbar(
+                                duration: Duration(seconds: 2),
+                                flushbarPosition: FlushbarPosition.TOP,
+                                backgroundColor: Color(0xFFFF5C83),
+                                message: "Name must not be empty",
+                              ).show(context);
+                            } else if (!(emailController.text.trim() != "")) {
+                              Flushbar(
+                                duration: Duration(seconds: 2),
+                                flushbarPosition: FlushbarPosition.TOP,
+                                backgroundColor: Color(0xFFFF5C83),
+                                message: "Email must not be empty",
+                              ).show(context);
+                            } else if (!(passwordController.text.trim() !=
+                                "")) {
+                              Flushbar(
+                                duration: Duration(seconds: 2),
+                                flushbarPosition: FlushbarPosition.TOP,
+                                backgroundColor: Color(0xFFFF5C83),
+                                message: "Password must not be empty",
+                              ).show(context);
+                            } else if (passwordController.text.length < 6) {
+                              Flushbar(
+                                duration: Duration(seconds: 2),
+                                flushbarPosition: FlushbarPosition.TOP,
+                                backgroundColor: Color(0xFFFF5C83),
+                                message: "Password's length min 6 characters",
+                              ).show(context);
+                            } else {
+                              setState(() {
+                                isLoading = true;
+                              });
+                              await context.read<UserCubit>().signUp(
+                                    nameController.text,
+                                    emailController.text,
+                                    passwordController.text,
+                                  );
+
+                              UserState state = context.read<UserCubit>().state;
+
+                              if (state is UserSignUp) {
+                                Navigator.pop(context);
+                                Flushbar(
+                                  duration: Duration(seconds: 2),
+                                  flushbarPosition: FlushbarPosition.TOP,
+                                  backgroundColor: Colors.green,
+                                  message:
+                                      "You have successfully registered an account",
+                                ).show(context);
+                              } else {
+                                setState(() {
+                                  isLoading = false;
+                                });
+                                Flushbar(
+                                  duration: Duration(seconds: 2),
+                                  flushbarPosition: FlushbarPosition.TOP,
+                                  backgroundColor: Color(0xFFFF5C83),
+                                  message: "Email registered",
+                                ).show(context);
+                              }
+                            }
+                          },
+                        ),
                 ),
                 SizedBox(
                   height: 30,

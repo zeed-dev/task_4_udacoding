@@ -8,12 +8,22 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   int selectedPage;
   PageController pageController;
+  SharedPreferences sharedPreferences;
+  String name;
+  String email;
 
   @override
   void initState() {
     super.initState();
+    getDataPref();
     selectedPage = 0;
     pageController = PageController(initialPage: 0);
+  }
+
+  getDataPref() async {
+    sharedPreferences = await SharedPreferences.getInstance();
+    name = sharedPreferences.getString("name");
+    email = sharedPreferences.getString("email");
   }
 
   @override
@@ -32,6 +42,10 @@ class _MainPageState extends State<MainPage> {
               children: [
                 HomePage(),
                 DictionaryPage(),
+                ProfilPage(
+                  name: name,
+                  email: email,
+                ),
               ],
             ),
           ),

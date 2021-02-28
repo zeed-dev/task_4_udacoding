@@ -14,9 +14,15 @@ class CustomBottomNavBar extends StatelessWidget {
     return Container(
       height: 60,
       width: double.infinity,
-      color: Colors.white,
+      padding: EdgeInsets.symmetric(horizontal: 50),
+      margin: EdgeInsets.symmetric(
+          horizontal: defaultMargin, vertical: defaultMargin),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(23),
+      ),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           GestureDetector(
             onTap: () {
@@ -24,10 +30,23 @@ class CustomBottomNavBar extends StatelessWidget {
                 onTap(0);
               }
             },
-            child: Icon(
-              Icons.home,
-              size: 32,
-              color: (selectedIndex == 0) ? blueColor : greyColor,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.home,
+                  size: 32,
+                  color: (selectedIndex == 0) ? blueColor : Color(0xffC4C4C4),
+                ),
+                Text(
+                  "Home",
+                  style: blackFontStyle.copyWith(
+                    fontSize: 11,
+                    color:
+                        (selectedIndex == 0) ? Colors.black : Color(0xffC4C4C4),
+                  ),
+                ),
+              ],
             ),
           ),
           GestureDetector(
@@ -36,10 +55,48 @@ class CustomBottomNavBar extends StatelessWidget {
                 onTap(1);
               }
             },
-            child: Icon(
-              Icons.book_online_outlined,
-              size: 32,
-              color: (selectedIndex == 1) ? blueColor : greyColor,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.book,
+                  size: 32,
+                  color: (selectedIndex == 1) ? blueColor : Color(0xffC4C4C4),
+                ),
+                Text(
+                  "Home",
+                  style: blackFontStyle.copyWith(
+                    fontSize: 11,
+                    color:
+                        (selectedIndex == 1) ? Colors.black : Color(0xffC4C4C4),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          GestureDetector(
+            onTap: () {
+              if (onTap != null) {
+                onTap(2);
+              }
+            },
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.person,
+                  size: 32,
+                  color: (selectedIndex == 2) ? blueColor : Color(0xffC4C4C4),
+                ),
+                Text(
+                  "Profile",
+                  style: blackFontStyle.copyWith(
+                    fontSize: 11,
+                    color:
+                        (selectedIndex == 2) ? Colors.black : Color(0xffC4C4C4),
+                  ),
+                ),
+              ],
             ),
           ),
         ],

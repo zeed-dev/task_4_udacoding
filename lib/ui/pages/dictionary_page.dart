@@ -124,7 +124,7 @@ class _DictionaryPageState extends State<DictionaryPage> {
                       ).toList(),
                     ),
               SizedBox(
-                height: 80,
+                height: 100,
               ),
             ],
           ),

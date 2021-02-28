@@ -116,6 +116,13 @@ class _SignInPageState extends State<SignInPage> {
                                 backgroundColor: Color(0xFFFF5C83),
                                 message: "Password must not be empty",
                               ).show(context);
+                            } else if (passwordController.text.length < 6) {
+                              Flushbar(
+                                duration: Duration(seconds: 2),
+                                flushbarPosition: FlushbarPosition.TOP,
+                                backgroundColor: Color(0xFFFF5C83),
+                                message: "Password's length min 6 characters",
+                              ).show(context);
                             } else {
                               setState(() {
                                 isLoading = true;
